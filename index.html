@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ILYSM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            
+        }
+        
+        h1 {
+            color: #ff0080;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+
+        h2 {
+            color: #ff0080;
+            margin-top: 25px;
+            font-size: 30px;
+        }
+        
+        .pedido {
+            margin-bottom: 50px;
+        }
+        
+        .botoes {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .botao {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #ff0080;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: absolute;
+        }
+        
+        .botao:hover {
+            transform: scale(1.1);
+        }
+        
+        .animacao {
+            display: none;
+            margin-top: 40px;
+            font-size: 24px;
+            color: #ff0080;
+            animation-name: pulsar;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            padding: 0;
+        }
+        img{
+            padding: 0;
+            display: block;
+            margin: 0 auto;
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            padding-left: 50px;
+            margin-top: 590px;
+            color: #ff0080;
+            font-size: 20px;
+        }
+        @keyframes pulsar {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    
+    <script>
+        window.addEventListener('load', function() {
+            var simButton = document.getElementById('sim');
+            var naoButton = document.getElementById('nao');
+            var animacaoDiv = document.getElementById('animacao');
+            var isTouchDevice = false;
+            
+            // Verifica se o dispositivo é um dispositivo de toque (celular ou tablet)
+            if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                isTouchDevice = true;
+            }
+            
+
+            simButton.addEventListener('click', function() {
+                simButton.style.display = 'none';
+                naoButton.style.display = 'none';
+                animacaoDiv.style.display = 'block';
+                animacaoDiv.classList.add('animacao');
+            });
+            
+            if (!isTouchDevice) {
+                var maxX = window.innerWidth - naoButton.offsetWidth;
+                var maxY = window.innerHeight - naoButton.offsetHeight;
+                
+                document.addEventListener('mousemove', function(e) {
+                    var mouseX = e.clientX;
+                    var mouseY = e.clientY;
+                    
+                    var naoButtonRect = naoButton.getBoundingClientRect();
+                    var naoButtonX = naoButtonRect.left + naoButtonRect.width / 2;
+                    var naoButtonY = naoButtonRect.top + naoButtonRect.height / 2;
+                    
+                    var distance = Math.sqrt(Math.pow(mouseX - naoButtonX, 2) + Math.pow(mouseY - naoButtonY, 2));
+                    
+                    if (distance < 100) {
+                        var newX = Math.floor(Math.random() * (maxX - naoButton.offsetWidth));
+                        var newY = Math.floor(Math.random() * (maxY - naoButton.offsetHeight));
+                        
+                        naoButton.style.left = newX + 'px';
+                        naoButton.style.top = newY + 'px';
+                    }
+                });
+            } else {
+                var mc = new Hammer(naoButton);
+                var startX, startY;
+                var buttonRect = naoButton.getBoundingClientRect();
+                
+                mc.on("panstart", function(e) {
+                    startX = buttonRect.left;
+                    startY = buttonRect.top;
+                });
+                
+                mc.on("panmove", function(e) {
+                    var newX = startX + e.deltaX;
+                    var newY = startY + e.deltaY;
+                    
+                    naoButton.style.left = newX + 'px';
+                    naoButton.style.top = newY + 'px';
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="pedido">
+        <h2>Amor, eu poderia falar tanto sobre você, sobre nós, eu apenas sou imensamente grato por tê-la na minha vida. Sei que está ocupada com a faculdade, mas não queria que hoje passasse em branco, hoje, faz 1 ano desde que nos falamos pela primeira vez, que trocamos o primeiro "Oi", por isso é um dia importante e o dia que escolhi para podermos sempre comemorar oque criamos. Essa foi a maneira que encontrei para pedir isso.</h2>
+        <h1> Rhayssa, quer namorar comigo? </h1>
+    </div>
+    <div class="botoes">
+        <button id="sim" class="botao">Sim</button>
+        <button id="nao" class="botao">Não</button>
+    </div>
+    <div id="animacao" class="animacao">
+        <div class="animationtext"> PARABÉNS VOCÊ FEZ A ESCOLHA CERTA, TE AMO AMOR!!!🎉</div>
+        <img src="https://i.ibb.co/gzjCkx6/removal-ai-82b7dc24-51fc-4bf0-bbbf-68dd53f512b4-ilovemyboyfie-cec6fa57-4bac-41a0-8959-f303b8364055.png" alt="removal-ai-82b7dc24-51fc-4bf0-bbbf-68dd53f512b4-ilovemyboyfie-cec6fa57-4bac-41a0-8959-f303b8364055" border="0" />
+    </div>
+    <footer>
+        <p> Made by Vinícíus Martins © </p>
+    </footer>
+    
+    <script src="./play.js"></script>
+</body>
+
+</html>
